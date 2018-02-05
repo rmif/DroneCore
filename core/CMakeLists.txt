@@ -104,9 +104,9 @@ if(NOT IOS AND NOT ANDROID)
         timeout_handler_test.cpp
         call_every_handler_test.cpp
         curl_test.cpp
-		# FIXME: Below line is NOT capturing plugin unit tests sources. So adding manually.
+        # FIXME: Below line is NOT capturing plugin unit tests sources. So adding manually.
         ${plugin_unittest_source_files}
-		${CMAKE_SOURCE_DIR}/plugins/mission/mission_import_qgc_test.cpp
+        ${CMAKE_SOURCE_DIR}/plugins/mission/mission_import_qgc_test.cpp
     )
 
     if (MSVC)
@@ -126,7 +126,7 @@ if(NOT IOS AND NOT ANDROID)
         gtest
         gtest_main
         gmock
-		dronecore_mission
+        dronecore_mission
     )
 
     add_test(unit_tests

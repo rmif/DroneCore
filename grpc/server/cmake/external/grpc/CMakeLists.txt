@@ -5,9 +5,10 @@ project(external-grpc)
 include(ExternalProject)
 
 ExternalProject_add(
-    grpc
+    grpc /home/jones/Documents/px4/tmp/dronecore-grpc-bare/grpc-bare
     GIT_REPOSITORY https://github.com/grpc/grpc.git
-    GIT_TAG v1.7.x
+    #GIT_REPOSITORY https://github.com/grpc/grpc.git
+    #GIT_TAG v1.7.x
     PREFIX grpc
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=$ENV{DRONECORESERVER_GRPC_BINARY_DIR}

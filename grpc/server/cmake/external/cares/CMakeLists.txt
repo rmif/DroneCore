@@ -1,18 +1,61 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 project(external-cares)
 
 include(ExternalProject)
 
-ExternalProject_add(
-    cares
-    GIT_REPOSITORY https://github.com/c-ares/c-ares.git
-    GIT_TAG cares-1_13_0
-    PREFIX cares
-    CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=$ENV{DRONECORESERVER_CARES_BINARY_DIR}
+set(ARG_GIT_REPOSITORY https://github.com/c-ares/c-ares.git)
+set(ARG_GIT_TAG cares-1_13_0)
+
+if(ANDROID)
+    message(STATUS "Preparing external project \"c-ares\" for Android...")
+    message(STATUS " -- CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
+    message(STATUS " -- ANDROID_ABI: ${ANDROID_ABI}")
+    message(STATUS " -- ANDROID_STL: ${ANDROID_STL}")
+
+    ExternalProject_add(
+        cares
+        GIT_REPOSITORY ${ARG_GIT_REPOSITORY}
+        GIT_TAG ${ARG_GIT_TAG}
+        PREFIX cares
+        CONFIGURE_COMMAND ${CMAKE_COMMAND}
+        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+        -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
+        -DANDROID_ABI:STRING=${ANDROID_ABI}
+        -DANDROID_STL:STRING=${ANDROID_STL}
         -DCARES_STATIC=ON
         -DCARES_SHARED=OFF
         -DCARES_STATIC_PIC=ON
-    UPDATE_COMMAND ""
-)
+        UPDATE_COMMAND "")
+elseif(IOS)
+    message(STATUS "Preparing external project \"c-ares\" for iOS...")
+    message(STATUS " -- CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
+
+    ExternalProject_add(
+        cares
+        GIT_REPOSITORY ${ARG_GIT_REPOSITORY}
+        GIT_TAG ${ARG_GIT_TAG}
+        PREFIX cares
+        CONFIGURE_COMMAND ${CMAKE_COMMAND}
+        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+        -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
+        -DIOS_PLATFORM=OS
+        -DCARES_STATIC=ON
+        -DCARES_SHARED=OFF
+        -DCARES_STATIC_PIC=ON
+        UPDATE_COMMAND "")
+else()
+    message(STATUS "Preparing external project \"c-ares\"...")
+
+    ExternalProject_add(
+        cares
+        GIT_REPOSITORY ${ARG_GIT_REPOSITORY}
+        GIT_TAG ${ARG_GIT_TAG}
+        PREFIX cares
+        CONFIGURE_COMMAND ${CMAKE_COMMAND}
+        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+        -DCARES_STATIC=ON
+        -DCARES_SHARED=OFF
+        -DCARES_STATIC_PIC=ON
+        UPDATE_COMMAND "")
+endif()

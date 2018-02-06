@@ -20,15 +20,15 @@ if(ANDROID)
         GIT_TAG ${ARG_GIT_TAG}
         PREFIX protobuf
         CONFIGURE_COMMAND ${CMAKE_COMMAND}
-        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
-        -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
-        -DANDROID_ABI:STRING=${ANDROID_ABI}
-        -DANDROID_STL:STRING=${ANDROID_STL}
-        -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
-        -Dprotobuf_BUILD_TESTS=OFF
-        -Dprotobuf_BUILD_SHARED_LIBS=OFF
-        -Dprotobuf_WITH_ZLIB=OFF
-        -Dprotobuf_MODULE_COMPATIBLE=ON
+            -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+            -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
+            -DANDROID_ABI:STRING=${ANDROID_ABI}
+            -DANDROID_STL:STRING=${ANDROID_STL}
+            -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
+            -Dprotobuf_BUILD_TESTS=OFF
+            -Dprotobuf_BUILD_SHARED_LIBS=OFF
+            -Dprotobuf_WITH_ZLIB=OFF
+            -Dprotobuf_MODULE_COMPATIBLE=ON
         <SOURCE_DIR>/cmake
         UPDATE_COMMAND "")
 elseif(IOS)
@@ -41,17 +41,17 @@ elseif(IOS)
         GIT_TAG ${ARG_GIT_TAG}
         PREFIX protobuf
         CONFIGURE_COMMAND ${CMAKE_COMMAND}
-        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
-        -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
-        -DIOS_PLATFORM=OS
-        -DRUN_HAVE_STD_REGEX=0
-        -DRUN_HAVE_POSIX_REGEX=0
-        -DRUN_HAVE_STEADY_CLOCK=0
-        -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
-        -Dprotobuf_BUILD_TESTS=OFF
-        -Dprotobuf_BUILD_SHARED_LIBS=OFF
-        -Dprotobuf_WITH_ZLIB=OFF
-        -Dprotobuf_MODULE_COMPATIBLE=ON
+            -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+            -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
+            -DIOS_PLATFORM=OS
+            -DRUN_HAVE_STD_REGEX=0
+            -DRUN_HAVE_POSIX_REGEX=0
+            -DRUN_HAVE_STEADY_CLOCK=0
+            -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
+            -Dprotobuf_BUILD_TESTS=OFF
+            -Dprotobuf_BUILD_SHARED_LIBS=OFF
+            -Dprotobuf_WITH_ZLIB=OFF
+            -Dprotobuf_MODULE_COMPATIBLE=ON
         <SOURCE_DIR>/cmake
         UPDATE_COMMAND "")
 else()
@@ -63,11 +63,11 @@ else()
         GIT_TAG ${ARG_GIT_TAG}
         PREFIX protobuf
         CONFIGURE_COMMAND ${CMAKE_COMMAND}
-        -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
-        -Dprotobuf_BUILD_TESTS=OFF
-        -Dprotobuf_BUILD_SHARED_LIBS=OFF
-        -Dprotobuf_WITH_ZLIB=OFF
-        -Dprotobuf_MODULE_COMPATIBLE=ON
+            -DCMAKE_INSTALL_PREFIX:PATH=${BINARY_DIR}
+            -Dprotobuf_BUILD_TESTS=OFF
+            -Dprotobuf_BUILD_SHARED_LIBS=OFF
+            -Dprotobuf_WITH_ZLIB=OFF
+            -Dprotobuf_MODULE_COMPATIBLE=ON
         <SOURCE_DIR>/cmake
         UPDATE_COMMAND "")
 endif()

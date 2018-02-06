@@ -4,9 +4,9 @@ project(external-protobuf)
 
 include(ExternalProject)
 
-set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/protobuf-bare)
-#set(ARG_GIT_REPOSITORY https://github.com/google/protobuf.git)
-#set(ARG_GIT_TAG v3.5.0)
+#set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/protobuf-bare)
+set(ARG_GIT_REPOSITORY https://github.com/google/protobuf.git)
+set(ARG_GIT_TAG v3.5.0)
 
 if(ANDROID)
     message(STATUS "Preparing external project \"protobuf\" for Android...")

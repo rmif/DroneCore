@@ -4,14 +4,14 @@ project(external-grpc)
 
 include(ExternalProject)
 
-message(FATAL " SPARTA CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}")
-set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/grpc-bare)
-#set(ARG_GIT_REPOSITORY https://github.com/dronecore/grpc.git)
-#set(GIT_TAG enable-android-ios-build)
+#set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/grpc-bare)
+set(ARG_GIT_REPOSITORY https://github.com/dronecore/grpc.git)
+set(GIT_TAG enable-android-ios-build)
 
 # This answer probably saved me from destroying my computer:
 # https://stackoverflow.com/questions/45414507/pass-a-list-of-prefix-paths-to-externalproject-add-in-cmake-args
 string(REPLACE ";" "|" CMAKE_PREFIX_PATH_ALT_SEP "${CMAKE_PREFIX_PATH}")
+string(REPLACE ";" "|" CMAKE_FIND_ROOT_PATH_ALT_SEP "${CMAKE_FIND_ROOT_PATH}")
 
 if(ANDROID)
     message(STATUS "Preparing external project \"grpc\" for Android...")
@@ -27,6 +27,7 @@ if(ANDROID)
         LIST_SEPARATOR |
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=${BINARY_DIR}
+            -DCMAKE_FIND_ROOT_PATH:STRING=${CMAKE_FIND_ROOT_PATH_ALT_SEP}
             -DCMAKE_PREFIX_PATH:STRING=${CMAKE_PREFIX_PATH_ALT_SEP}
             -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
             -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
@@ -55,6 +56,8 @@ elseif(IOS)
         PREFIX grpc
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=${BINARY_DIR}
+            -DCMAKE_FIND_ROOT_PATH:STRING=${CMAKE_FIND_ROOT_PATH_ALT_SEP}
+            -DCMAKE_PREFIX_PATH:STRING=${CMAKE_PREFIX_PATH_ALT_SEP}
             -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
             -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
             -DIOS_PLATFORM=OS
@@ -80,6 +83,8 @@ else()
         PREFIX grpc
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=${BINARY_DIR}
+            -DCMAKE_FIND_ROOT_PATH:STRING=${CMAKE_FIND_ROOT_PATH_ALT_SEP}
+            -DCMAKE_PREFIX_PATH:STRING=${CMAKE_PREFIX_PATH_ALT_SEP}
             -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
             -DgRPC_BUILD_TESTS=OFF
             -DgRPC_ZLIB_PROVIDER=package

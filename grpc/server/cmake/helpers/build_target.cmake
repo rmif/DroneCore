@@ -1,7 +1,6 @@
 function(build_target SRC_DIR TARGET_DIR)
     file(MAKE_DIRECTORY ${TARGET_DIR}/build)
 
-    message(FATAL "SPARTA :-( :'( ${CMAKE_PREFIX_PATH}")
     execute_process(
         COMMAND ${CMAKE_COMMAND}
             -G${CMAKE_GENERATOR}
@@ -12,7 +11,7 @@ function(build_target SRC_DIR TARGET_DIR)
             -DANDROID_ABI=${ANDROID_ABI}
             -DANDROID_STL=${ANDROID_STL}
             ${SRC_DIR}
-        WORKING_DIRECTORY ${TARGET_DIR}/build
+        WORKING_DIRECTORY "${TARGET_DIR}/build"
     )
 
     execute_process(COMMAND ${CMAKE_COMMAND} --build .

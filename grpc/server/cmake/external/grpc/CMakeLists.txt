@@ -9,6 +9,10 @@ set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/grpc-ba
 #set(ARG_GIT_REPOSITORY https://github.com/dronecore/grpc.git)
 #set(GIT_TAG enable-android-ios-build)
 
+# This answer probably saved me from destroying my computer:
+# https://stackoverflow.com/questions/45414507/pass-a-list-of-prefix-paths-to-externalproject-add-in-cmake-args
+string(REPLACE ";" "|" CMAKE_PREFIX_PATH_ALT_SEP "${CMAKE_PREFIX_PATH}")
+
 if(ANDROID)
     message(STATUS "Preparing external project \"grpc\" for Android...")
     message(STATUS " -- CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
@@ -20,9 +24,10 @@ if(ANDROID)
         GIT_REPOSITORY ${ARG_GIT_REPOSITORY}
         GIT_TAG ${ARG_GIT_TAG}
         PREFIX grpc
+        LIST_SEPARATOR |
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX=${BINARY_DIR}
-            "-DCMAKE_PREFIX_PATH:STRING=${CMAKE_PREFIX_PATH}"
+            -DCMAKE_PREFIX_PATH:STRING=${CMAKE_PREFIX_PATH_ALT_SEP}
             -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
             -DCMAKE_TOOLCHAIN_FILE:PATH=${CMAKE_TOOLCHAIN_FILE}
             -DANDROID_ABI:STRING=${ANDROID_ABI}

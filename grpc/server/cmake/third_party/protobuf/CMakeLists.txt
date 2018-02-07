@@ -6,7 +6,7 @@ include(ExternalProject)
 
 #set(ARG_GIT_REPOSITORY /home/jones/Documents/px4/tmp/dronecore-grpc-bare/protobuf-bare)
 set(ARG_GIT_REPOSITORY https://github.com/google/protobuf.git)
-set(ARG_GIT_TAG v3.5.0)
+set(ARG_GIT_TAG master)
 
 if(ANDROID)
     message(STATUS "Preparing external project \"protobuf\" for Android...")
@@ -29,8 +29,7 @@ if(ANDROID)
             -Dprotobuf_BUILD_SHARED_LIBS=OFF
             -Dprotobuf_WITH_ZLIB=OFF
             -Dprotobuf_MODULE_COMPATIBLE=ON
-        <SOURCE_DIR>/cmake
-        UPDATE_COMMAND "")
+        <SOURCE_DIR>/cmake)
 elseif(IOS)
     message(STATUS "Preparing external project \"protobuf\" for iOS...")
     message(STATUS " -- CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
@@ -52,8 +51,7 @@ elseif(IOS)
             -Dprotobuf_BUILD_SHARED_LIBS=OFF
             -Dprotobuf_WITH_ZLIB=OFF
             -Dprotobuf_MODULE_COMPATIBLE=ON
-        <SOURCE_DIR>/cmake
-        UPDATE_COMMAND "")
+        <SOURCE_DIR>/cmake)
 else()
     message(STATUS "Preparing external project \"protobuf\"...")
 
@@ -68,6 +66,5 @@ else()
             -Dprotobuf_BUILD_SHARED_LIBS=OFF
             -Dprotobuf_WITH_ZLIB=OFF
             -Dprotobuf_MODULE_COMPATIBLE=ON
-        <SOURCE_DIR>/cmake
-        UPDATE_COMMAND "")
+        <SOURCE_DIR>/cmake)
 endif()

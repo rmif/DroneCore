@@ -43,8 +43,9 @@ if(ANDROID)
             -DgRPC_PROTOBUF_PROVIDER=package
             -DgRPC_PROTOBUF_PACKAGE_TYPE=CONFIG
             -DgRPC_SSL_PROVIDER=package
-            -DgRPC_INSTALL_default=ON
-        UPDATE_COMMAND "")
+            -DOPENSSL_USE_STATIC_LIBS=TRUE
+            -DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR}
+            -DgRPC_INSTALL_default=ON)
 elseif(IOS)
     message(STATUS "Preparing external project \"grpc\" for iOS...")
     message(STATUS " -- CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
@@ -71,8 +72,9 @@ elseif(IOS)
             -DgRPC_PROTOBUF_PROVIDER=package
             -DgRPC_PROTOBUF_PACKAGE_TYPE=CONFIG
             -DgRPC_SSL_PROVIDER=package
-            -DgRPC_INSTALL_default=ON
-        UPDATE_COMMAND "")
+            -DOPENSSL_USE_STATIC_LIBS=TRUE
+            -DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR}
+            -DgRPC_INSTALL_default=ON)
 else()
     message(STATUS "Preparing external project \"grpc\"...")
 
@@ -92,6 +94,7 @@ else()
             -DgRPC_PROTOBUF_PROVIDER=package
             -DgRPC_PROTOBUF_PACKAGE_TYPE=CONFIG
             -DgRPC_SSL_PROVIDER=package
-            -DgRPC_INSTALL_default=ON
-        UPDATE_COMMAND "")
+            -DOPENSSL_USE_STATIC_LIBS=TRUE
+            -DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR}
+            -DgRPC_INSTALL_default=ON)
 endif()
